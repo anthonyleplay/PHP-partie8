@@ -1,33 +1,18 @@
 <?php
 
 $message = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // collect value of input field
     $loginName = 'login';
     $passName = 'password';
-    $passValue = $_POST['password'];
 
-    if (empty($_POST[$loginName])) {
+    if (!isset($_COOKIE[$loginName]) && !isset($_COOKIE[$passName])) {
         $message = "merci d'entré un Login et un Mot de passe";
     } else {
-        $loginValue = $_POST[$loginName];
-
-        if (empty($_POST[$passName])) {
-            $message = "merci d'entré un Login et un Mot de passe";
-        } else {
-            $passValue = $_POST[$passName];
-            setcookie($loginName, $loginValue, time() + (86400 * 30), "/"); // 86400 = 1 day
-            setcookie($passName, $passValue, time() + (86400 * 30), "/"); // 86400 = 1 day
-
-            if (!isset($_COOKIE[$loginName]) && !isset($_COOKIE[$passName])) {
-                $message = "merci d'entré un Login et un Mot de passe";
-            } else {
-                $message = "votre login est : " . $_COOKIE[$loginName] . "<br>
-                            Votre mot de passe est : " . $_COOKIE[$passName];
-            };
-        };
+        $message = "votre login est : " . $_COOKIE[$loginName] . "<br>
+                    Votre mot de passe est : " . $_COOKIE[$passName];
     };
-};
+
 
 ?>
 

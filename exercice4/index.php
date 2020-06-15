@@ -1,11 +1,8 @@
 <?php
 
-$message = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect value of input field
     $loginName = 'login';
     $passName = 'password';
-    $passValue = $_POST['password'];
 
     if (empty($_POST[$loginName])) {
         $message = "merci d'entré un Login et un Mot de passe";
@@ -18,16 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $passValue = $_POST[$passName];
             setcookie($loginName, $loginValue, time() + (86400 * 30), "/"); // 86400 = 1 day
             setcookie($passName, $passValue, time() + (86400 * 30), "/"); // 86400 = 1 day
-
-            if (!isset($_COOKIE[$loginName]) && !isset($_COOKIE[$passName])) {
-                $message = "merci d'entré un Login et un Mot de passe";
-            } else {
-                $message = "votre login est : " . $_COOKIE[$loginName] . "<br>
-                            Votre mot de passe est : " . $_COOKIE[$passName];
-            };
         };
     };
-};
 
 ?>
 
@@ -54,13 +43,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <p>===================================</p>
 
-    <form action="/exercice4/page2.php" method="post">
+    <form action="/exercice4/index.php" method="post">
         <label for="login">login:</label><br>
         <input type="text" id="login" name="login" required><br>
         <label for="password">Mot de Passe:</label><br>
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="envoyer">
-    </form><br><br>
+    </form>
 
 
 </body>
